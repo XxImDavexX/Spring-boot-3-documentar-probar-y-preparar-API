@@ -76,4 +76,13 @@ public class Direccion {
     public void setComplemento(String complemento) {
         this.complemento = complemento;
     }
+
+    public Direccion actualizarDireccion(DatosDireccion direccion) {
+        this.calle = direccion.calle();
+        this.numero = direccion.numero();
+        this.distrito = direccion.distrito();
+        this.complemento = direccion.complemento();
+        this.ciudad = direccion.ciudad();
+        return this;
+    }
 }
