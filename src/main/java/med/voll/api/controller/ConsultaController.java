@@ -1,6 +1,7 @@
 package med.voll.api.controller;
 
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import med.voll.api.domain.consulta.AgendaDeConsultaService;
 import med.voll.api.domain.consulta.DatosAgendarConsulta;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 // entre nuestra app y las apps externas.
 @RestController
 @RequestMapping("/consultas")
+@SecurityRequirement(name = "bearer-key")
 public class ConsultaController {
 
     @Autowired
@@ -25,8 +27,8 @@ public class ConsultaController {
     @Transactional
     public ResponseEntity agendar(@RequestBody @Valid DatosAgendarConsulta datos){
 
-        service.agendar(datos);
+        var datosConsulta = service.agendar(datos);
 
-        return ResponseEntity.ok(new DatosDetalleConsulta(null,null,null,null));
+        return ResponseEntity.ok(datosConsulta);
     }
 }
